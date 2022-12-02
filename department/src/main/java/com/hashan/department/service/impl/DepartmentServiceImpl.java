@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -25,5 +27,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = modelMapper.map(departmentDto, Department.class);
         Department save = departmentRepo.save(department);
         return modelMapper.map(save,DepartmentDto.class);
+    }
+
+    @Override
+    public DepartmentDto findDepartmentById(Long departmentId) {
+        Department department = departmentRepo.findDepartmentById(departmentId);
+        if(department.getDepartmentId() !=null)
+            return modelMapper.map(department,DepartmentDto.class);
+        return null;
     }
 }
