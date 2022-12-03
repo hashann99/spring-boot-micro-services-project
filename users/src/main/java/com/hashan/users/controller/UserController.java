@@ -18,8 +18,9 @@ public class UserController {
         return userService.saveUser(userDto);
     }
 
-    @GetMapping("/find")
-    public ResponseTemplateVo findUserWithDepartmentByUserId(@PathVariable("Id") Long userId){
+    @GetMapping("/find/{id}")
+    public ResponseTemplateVo findUserWithDepartmentByUserId(@PathVariable("id") Long userId){
+        System.out.println("Working");
         return userService.findUserWithDepartmentByUserId(userId);
     }
 

@@ -35,11 +35,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseTemplateVo findUserWithDepartmentByUserId(Long userId) {
+        ResponseTemplateVo vo = new ResponseTemplateVo();
 
-        User userEntity = userRepo.findUserById(userId);
+        User user = userRepo.findUserById(userId);
+        Department department = restTemplate.getForObject("http://localhost:9001/departments/" + user.getDepartmentId(), Department.class);
+        vo.setUser(user);
+        vo.setDepartment(department);
+        return vo;
 
-        restTemplate.getForObject("", Department.class);
-
-        return modelMapper.map(userEntity,UserDto.class);
     }
 }
